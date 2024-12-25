@@ -2362,47 +2362,69 @@ case 'guess': {
 
     // Lista de acertijos
     const acertijos = [
-        { pregunta: "¿Qué tiene manos pero no puede aplaudir?", respuesta: "el reloj" },
-        { pregunta: "Mientras más quitas, más grande soy. ¿Qué soy?", respuesta: "un agujero" },
-        { pregunta: "Soy alto cuando soy joven y bajo cuando soy viejo. ¿Qué soy?", respuesta: "una vela" },
-        { pregunta: "¿Qué puede viajar alrededor del mundo mientras permanece en el mismo lugar?", respuesta: "un sello" },
-        { pregunta: "¿Qué tiene un ojo pero no puede ver?", respuesta: "una aguja" },
+        { pregunta: "¿Qué tiene manos pero no puede aplaudir?", respuesta: "reloj" },
+        { pregunta: "Mientras más quitas, más grande soy. ¿Qué soy?", respuesta: "agujero" },
+        { pregunta: "Soy alto cuando soy joven y bajo cuando soy viejo. ¿Qué soy?", respuesta: "vela" },
+        { pregunta: "¿Qué puede viajar alrededor del mundo mientras permanece en el mismo lugar?", respuesta: "sello" },
+        { pregunta: "¿Qué tiene un ojo pero no puede ver?", respuesta: "aguja" },
     ];
 
     // Seleccionar un acertijo al azar
     const acertijo = acertijos[Math.floor(Math.random() * acertijos.length)];
-    enviar(`🤔 *Acertijo:* ${acertijo.pregunta}\n\nTienes 30 segundos para responder. Escribe tu respuesta con el prefijo *#*. Ejemplo: #respuesta`);
+    enviar(`🤔 *Acertijo:* ${acertijo.pregunta}\n\nTienes 30 segundos para responder. Escribe tu respuesta en texto libre.`);
 
     // Configurar variables
-    const respuestaCorrecta = `#${acertijo.respuesta.toLowerCase()}`; // Respuesta con prefijo
+    const respuestaCorrecta = acertijo.respuesta.toLowerCase();
     const tiempo = 30 * 1000; // 30 segundos
     const userId = sender; // ID del usuario que activó el comando
     let acertado = false;
 
+    // Función para normalizar texto
+    const normalizeText = (text) => {
+        return text
+            .toLowerCase()
+            .normalize("NFD") // Eliminar tildes
+            .replace(/[\u0300-\u036f]/g, "") // Remover diacríticos
+            .replace(/[^a-zA-Z0-9 ]/g, "") // Remover caracteres especiales
+            .replace(/\s+/g, ' ') // Reemplazar múltiples espacios con uno solo
+            .trim(); // Eliminar espacios al inicio y final
+    };
+
     // Listener para capturar respuestas
     const respuestaListener = async (respuesta) => {
-        const message = respuesta.message?.conversation || respuesta.message?.extendedTextMessage?.text;
+        try {
+            const message = respuesta.messages[0]?.message?.conversation || 
+                            respuesta.messages[0]?.message?.extendedTextMessage?.text;
 
-        // Ignorar mensajes sin texto
-        if (!message) return;
+            console.log("Mensaje recibido:", message); // Log para depuración
 
-        const texto = message.toLowerCase();
-        const autor = respuesta.key?.participant || respuesta.key?.remoteJid;
+            // Ignorar mensajes sin texto
+            if (!message) return;
 
-        // Ignorar mensajes de otros usuarios o sin prefijo
-        if (autor !== userId || !texto.startsWith('#')) return;
+            const texto = normalizeText(message);
+            const autor = respuesta.messages[0]?.key?.participant || respuesta.messages[0]?.key?.remoteJid;
 
-        // Verificar si la respuesta es correcta o incorrecta
-        if (texto === respuestaCorrecta) {
-            acertado = true;
-            bal[userId] = (bal[userId] || 0) + 500; // Otorgar coins
-            enviar(`🎉 ¡Correcto! Has ganado 500 ${moneda}. Tu saldo actual es de ${bal[userId]} ${moneda}.`);
-        } else {
-            enviar(`❌ Respuesta incorrecta. La respuesta correcta era: *${respuestaCorrecta}*.`);
+            console.log("Texto normalizado:", texto);
+            console.log("Autor del mensaje:", autor);
+
+            // Ignorar mensajes de otros usuarios
+            if (autor !== userId) {
+                console.log("Mensaje ignorado: no es del usuario correcto.");
+                return;
+            }
+
+            // Verificar si la respuesta es correcta
+            if (texto === normalizeText(respuestaCorrecta)) {
+                acertado = true;
+                bal[userId] = (bal[userId] || 0) + 500; // Otorgar coins
+                enviar(`🎉 ¡Correcto! Has ganado 500 ${moneda}. Tu saldo actual es de ${bal[userId]} ${moneda}.`);
+                finalizarJuego();
+            } else {
+                console.log("Respuesta incorrecta:", texto);
+            }
+        } catch (error) {
+            console.error("Error en respuestaListener:", error);
         }
-
-        // Finalizar el juego
-        finalizarJuego();
     };
 
     // Función para finalizar el juego
@@ -2420,8 +2442,9 @@ case 'guess': {
 
     // Activar el listener
     sock.ev.on("messages.upsert", respuestaListener);
+    console.log("Listener activado para capturar respuestas.");
     break;
-}
+					      }
 
 case "transfer": 
 case "cambiar": {
