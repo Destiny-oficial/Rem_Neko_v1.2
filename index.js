@@ -365,13 +365,13 @@ return admins
 
 // Constantes Editables
 const prefixo = "#"; // Cambiar Prefijo Aquí
-const wm = "Destiny Oficial" // cambiar creador
-let botname = "Destiny Neko" // Cambiar nombre del bot
+const wm = "Rem Neko" // cambiar creador
+let botname = "Rem Neko ❄️" // Cambiar nombre del bot
 let moneda = "coins" //cambia el nombre de la moneda 
 
 
 // cambiar el banner de bot
-let bannerbot = "https://postimage.me/images/2024/12/18/IMG-20241217-WA0403.jpg";
+let bannerbot = "https://postimage.me/images/2024/12/21/IMG-20241220-WA0088.jpg";
 
 const numerodono = "+5213339992782"; // cambiar número
 const themeemoji = "🥰" ; // cambiar emoji
@@ -489,10 +489,10 @@ a salido del grupo
  espero te vaya bien fuera sel grupo xd
  Neko bot de Destiny Oficial🌸
  
-> ¡Te deseamos lo mejor!
+ > ¡Te deseamos lo mejor!
  hasta pronto mi buen amigo 👋
  
- > para pedir la lista de comandos es #help y también puedes pedir una foto de un neko con #neko 
+> para pedir la lista de comandos es #help y también puedes pedir una foto de un neko con #neko 
 *te quiero y todos los del grupo te queremos muchísimo NUEVO INTEGRANTE*
                 `;
 
