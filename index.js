@@ -714,6 +714,8 @@ case "menu":
 ✦ *#guess*
 → gana dinero haciendo acertijos
 
+*bal* - *banco* 
+para ver tu dinero obtenido.
 
 »  ⊹˚୨ •(=^●ω●^=)•  *Gacha* ⊹
 
@@ -743,7 +745,7 @@ case "menu":
 ✦ *#𝑛𝑒𝑘𝑜 • #gato*
 → 𝑚𝑢𝑒𝑠𝑡𝑟𝑎 𝑢𝑛𝑎 𝑖𝑚𝑎𝑔𝑒𝑛 𝑑𝑒 𝑢𝑛 𝑛𝑒𝑘𝑜.
  
-✦ *#sell + nombre de waifu*
+✦ *#sellw + nombre de waifu*
 → para vender una waifu.
  
 ✦ *#buyw + nombre*
