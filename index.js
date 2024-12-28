@@ -997,22 +997,22 @@ case "banco": {
         return enviar("❖ El bot *Destiny Neko* está desactivado en este grupo. Un *administrador* puede activarlo con el comando: » *#bot on*");
     }
 
-    // Inicializar balance si no existe
-    if (!bal[sender]) {
-        bal[sender] = { banco: 0, dinero: 0 }; // Dinero en banco y en mano
+    // Asegurar que el balance para el usuario actual exista y sea válido
+    if (!bal[sender] || typeof bal[sender] !== "object" || bal[sender] === null) {
+        bal[sender] = { banco: 0, dinero: 0 }; // Crear entrada válida si no existe
     }
 
-    const { banco, dinero } = bal[sender];
+    // Extraer valores correctamente del objeto
+    const { banco = 0, dinero = 0 } = bal[sender]; // Usa valores predeterminados si faltan claves
     const total = banco + dinero;
 
     // Mostrar el balance con detalles
     enviar(
         `💰 *Tu dinero Actual es de:*\n\n` +
         `- Efectivo: *${dinero}* ${moneda}\n` +
-        `- Banco: *${bal[sender]}* ${moneda}\n` +
+        `- Banco: *${banco}* ${moneda}\n` +
         `- Total: *${total}* ${moneda}\n\n` +
-'> banco ilustrativo de Neko Bot'
-        
+        "> banco ilustrativo de Neko Bot"
     );
 
     // Inicializar el usuario si no existe en el objeto `user`
@@ -1024,7 +1024,7 @@ case "banco": {
     // Incrementar el nivel si alcanza el umbral
     if (user[sender].comandos % comandosPorNivel === 0) {
         user[sender].nivel += 1;
-        enviar(`🎉 ¡Felicidades! Has subido al nivel ${user[sender].nivel} (${obtenerRango(user[sender].nivel)}).`);
+        enviar(`🎉 ¡Felicidades! Has subido al nivel ${user[sender].nivel} (${obtenerRango(user[sender].nivel).nombre}).`);
     }
 
     // Guardar cambios en los archivos
@@ -1683,79 +1683,7 @@ fs.writeFileSync('user.json', JSON.stringify(user, null, 2));
     break;
 }
 
-case 'waifu': {
-    console.log("Mensaje completo recibido:", m); // Muestra toda la estructura del mensaje para identificar errores
 
-    // Accede al texto del mensaje según la estructura de `m`
-    const messageContent = m.messages[0]?.message;
-    const text = messageContent?.conversation || messageContent?.extendedTextMessage?.text || ''; 
-    console.log("Texto recibido:", text); // Muestra el texto procesado
-
-    if (!text) {
-        await sock.sendMessage(from, { text: "Por favor, especifica el nombre de la waifu. Ejemplo: #waifu rem" });
-        break;
-    }
-
-    const args = text.split(' '); // Divide el texto por espacios
-    const waifuName = args[1]?.toLowerCase(); // Obtén el nombre de la waifu
-    console.log("Nombre de waifu:", waifuName); // Muestra el nombre de la waifu para depuración
-
-    const waifus = {
-        rem: [
-            "https://postimage.me/images/2024/11/29/1709362183412.jpg",
-            "https://postimage.me/images/2024/11/29/1709362109742.jpg",
-            "https://postimage.me/images/2024/11/29/1709362057849.jpg"
-        ],
-        emilia: [
-            "https://postimage.me/images/2024/11/29/1732915165774.jpg",
-            "https://postimage.me/images/2024/11/29/1732915221681.jpg",
-            "https://postimage.me/images/2024/11/29/1732914130942.jpg"
-        ],
-        asuna: [
-            "https://postimage.me/images/2024/11/29/1732913697820.jpg",
-            "https://postimage.me/images/2024/11/29/1732913709812.jpg",
-            "https://postimage.me/images/2024/11/29/1732913764517.jpg"
-        ],
-        miku: [
-           "https://postimage.me/images/2024/11/30/1732927724779.jpg",
-            "https://postimage.me/images/2024/11/30/1732927736031.jpg",
-            "https://postimage.me/images/2024/11/30/1732927744955.jpg"
-            ],
-            Kotegawa: [
-             "https://postimage.me/images/2024/11/30/1732928289885.jpg",
-            "https://postimage.me/images/2024/11/30/1732928298089.jpg",
-            "https://postimage.me/images/2024/11/30/1732928306306.jpg"
-           ]
-    };
-
-    if (waifuName && waifus[waifuName]) {
-        const images = waifus[waifuName];
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-
-        const caption = `Aquí tienes una waifu: ${waifuName.charAt(0).toUpperCase() + waifuName.slice(1)}`;
-        await sock.sendMessage(from, { image: { url: randomImage }, caption: caption });
-    } else {
-        await sock.sendMessage(from, { text: "Lo siento, no tengo imágenes de ese personaje. Prueba con: Rem, Emilia, Asuna, etc." });
-    }
-    
-     // Inicializa el usuario si no existe en el objeto `user`
-user[sender] = user[sender] || { nivel: 1, comandos: 0 };
-
-// Incrementa los comandos usados
-user[sender].comandos += 1;
-
-// Incrementa el nivel si alcanza el umbral
-if (user[sender].comandos % comandosPorNivel === 0) {
-    user[sender].nivel += 1;
-    enviar(`🎉 ¡Felicidades! Has subido al nivel ${user[sender].nivel} (${obtenerRango(user[sender].nivel)}).`);
-}
-
-// Guarda los cambios en el archivo user.json
-fs.writeFileSync('user.json', JSON.stringify(user, null, 2));
-    fs.writeFileSync('balance.json', JSON.stringify(bal, null, 2));
-    
-    break;
-}
 
 case 'ban': {
     const senderNumber = sender.split('@')[0]; // Normaliza el remitente
@@ -2842,6 +2770,39 @@ case "sellw": {
     break;
 }
 
+case "sellw": {
+    const [nombreWaifu, precio] = args; // Separa el nombre y el precio
+    const precioNum = parseInt(precio, 10); // Convierte el precio a número
+
+    if (!nombreWaifu || isNaN(precioNum) || precioNum <= 0) {
+        enviar("❌ Uso: #sellw <nombre_waifu> <precio>. Ejemplo: #sellw Mikasa 1000");
+        break;
+    }
+
+    // Verificar si la waifu está en el harem del usuario
+    const waifuIndex = userHarem[sender]?.findIndex(w => w.name.toLowerCase() === nombreWaifu.toLowerCase());
+    if (waifuIndex === -1) {
+        enviar("❌ No tienes una waifu con ese nombre en tu harem.");
+        break;
+    }
+
+    // Mover la waifu a la tienda
+    const waifu = userHarem[sender][waifuIndex];
+    waifu.seller = sender; // Agregar información del vendedor
+    waifu.price = precioNum; // Establecer el precio
+    wshop.push(waifu);
+
+    // Eliminarla del harem del usuario
+    userHarem[sender].splice(waifuIndex, 1);
+
+    // Guardar cambios
+    fs.writeFileSync('userHarem.json', JSON.stringify(userHarem, null, 2));
+    fs.writeFileSync('wshop.json', JSON.stringify(wshop, null, 2));
+
+    enviar(`✅ Has puesto en venta a "${nombreWaifu}" por ${precioNum} ${moneda}. Ahora está disponible en la tienda.`);
+    break;
+}
+
 
 case "wshop": {
     if (wshop.length === 0) {
@@ -2851,57 +2812,81 @@ case "wshop": {
 
     // Crear la lista de waifus a la venta
     const tiendaMensaje = wshop
-        .map((waifu, index) => 
-            `✨ ${index + 1}. *${waifu.name}*\n   - 💰 Precio: ${waifu.price} ${moneda}\n   - 🏷️ Vendido por: @${waifu.seller.split('@')[0]}`)
+        .map((waifu, index) => {
+            const nombre = waifu.nombre || "Desconocido";
+            const precio = waifu.precio || "No especificado";
+            const vendedor = waifu.vendedor ? `@${waifu.vendedor.split('@')[0]}` : "Vendedor desconocido";
+
+            return `✨ ${index + 1}. *${nombre}*\n   - 💰 Precio: ${precio} ${moneda}\n   - 🏷️ Vendido por: ${vendedor}`;
+        })
         .join("\n\n");
 
-    enviar(`🛒 *Tienda de Waifus:*\n\n${tiendaMensaje}`, { mentions: wshop.map(w => w.seller) });
+    try {
+        enviar(`🛒 *Tienda de Waifus:*\n\n${tiendaMensaje}`, { mentions: wshop.map(w => w.vendedor).filter(Boolean) });
+    } catch (error) {
+        console.error("Error al enviar el mensaje del wshop:", error);
+        enviar("❌ Hubo un error al intentar mostrar el wshop.");
+    }
+
     break;
 }
 
 
 case "buyw": {
-    const nombreWaifu = q.trim(); // Nombre de la waifu a comprar
-
-    if (!nombreWaifu) {
-        enviar("❌ Uso: #buyw <nombre_waifu>. Ejemplo: #buyw Mikasa");
+    if (!args[0]) {
+        enviar("❌ Por favor, especifica el nombre de la waifu que deseas comprar. Ejemplo: #buyw [nombre]");
         break;
     }
 
-    // Buscar la waifu en la tienda
-    const waifuIndex = wshop.findIndex(w => w.name.toLowerCase() === nombreWaifu.toLowerCase());
+    const waifuName = args[0].toLowerCase().trim(); // Convertir a minúsculas y eliminar espacios
+    const buyer = sender; // ID del comprador
+
+    // Buscar la waifu en el wshop
+    const waifuIndex = wshop.findIndex(waifu => 
+        waifu.nombre && waifu.nombre.toLowerCase() === waifuName
+    );
+
     if (waifuIndex === -1) {
-        enviar("❌ No se encontró una waifu con ese nombre en la tienda.");
+        enviar(`❌ No se encontró ninguna waifu con el nombre "${args[0]}" en el wshop.`);
         break;
     }
 
     const waifu = wshop[waifuIndex];
 
-    // Verificar si el comprador tiene suficientes coins
-    const buyerBalance = bal[sender] || 0;
-    if (buyerBalance < waifu.price) {
-        enviar(`❌ No tienes suficientes ${moneda} para comprar a "${waifu.name}". Necesitas ${waifu.price - buyerBalance} más.`);
+    // Verificar si el comprador tiene suficiente balance
+    if (!bal[buyer] || bal[buyer] < waifu.precio) {
+        enviar(`❌ No tienes suficientes ${moneda} para comprar a "${waifu.nombre}". Necesitas ${waifu.precio} ${moneda}.`);
         break;
     }
 
-    // Realizar la transacción
-    bal[sender] -= waifu.price; // Restar al comprador
-    bal[waifu.seller] = (bal[waifu.seller] || 0) + waifu.price; // Sumar al vendedor
+    // Restar el precio del balance del comprador
+    bal[buyer] -= waifu.precio;
 
-    // Transferir la waifu al comprador
-    userHarem[sender] = userHarem[sender] || [];
-    userHarem[sender].push(waifu);
+    // Agregar el balance al vendedor
+    bal[waifu.vendedor] = (bal[waifu.vendedor] || 0) + waifu.precio;
 
-    // Eliminarla de la tienda
+    // Transferir la waifu al harem del comprador
+    groupHarem[from] = groupHarem[from] || {};
+    groupHarem[from][buyer] = groupHarem[from][buyer] || [];
+    groupHarem[from][buyer].push({
+        name: waifu.nombre,
+        image: waifu.imagen,
+        value: waifu.precio,
+        votes: [],
+        gender: "Desconocido", // Agregar el género si está disponible
+        source: waifu.fuente || "Desconocido",
+        claimedBy: buyer
+    });
+
+    // Eliminar la waifu del wshop
     wshop.splice(waifuIndex, 1);
 
-    // Guardar cambios
-    fs.writeFileSync('userHarem.json', JSON.stringify(userHarem, null, 2));
-    fs.writeFileSync('wshop.json', JSON.stringify(wshop, null, 2));
+    // Guardar los cambios
     fs.writeFileSync('balance.json', JSON.stringify(bal, null, 2));
+    fs.writeFileSync('groupHarem.json', JSON.stringify(groupHarem, null, 2));
+    fs.writeFileSync('wshop.json', JSON.stringify(wshop, null, 2));
 
-    enviar(`✅ Has comprado a "${waifu.name}" por ${waifu.price} ${moneda}. Ahora está en tu harem.`);
-    guardarBalance( );
+    enviar(`✅ ¡Has comprado a "${waifu.nombre}" por ${waifu.precio} ${moneda}!`);
     break;
 }
 
