@@ -3714,6 +3714,133 @@ case "delrol": {
     break;
 }
 
+case "retirar":
+case "r": {
+    if (isApagado) {
+        return enviar("❖ El bot *Destiny Neko* está desactivado en este grupo. Un *administrador* puede activarlo con el comando: » *#bot on*");
+    }
+
+    // Asegurar que el balance del usuario exista y sea válido
+    if (!bal[sender] || typeof bal[sender] !== "object" || bal[sender] === null) {
+        bal[sender] = { banco: 0, dinero: 0 }; // Crear entrada válida si no existe
+    }
+
+    const args = body.trim().split(/ +/).slice(1); // Obtener los argumentos después del comando
+    const cantidad = args[0]; // La cantidad a retirar (puede ser número o "all")
+
+    if (!cantidad) {
+        return enviar("❌ Por favor, especifica la cantidad a retirar. Ejemplo: *#retirar 100* o *#retirar all*");
+    }
+
+    const saldoBanco = bal[sender].banco;
+
+    if (cantidad.toLowerCase() === "all") {
+        if (saldoBanco <= 0) {
+            return enviar("❌ No tienes suficiente dinero en el banco para retirar.");
+        }
+
+        // Retirar todo el dinero del banco
+        bal[sender].dinero += saldoBanco;
+        bal[sender].banco = 0;
+
+        enviar(
+            `✅ Has retirado todo tu dinero del banco (${saldoBanco} ${moneda}).\n\n` +
+            `💰 *Balance actualizado:*\n- Efectivo: *${bal[sender].dinero}* ${moneda}\n` +
+            `- Banco: *${bal[sender].banco}* ${moneda}\n` +
+            `- Total: *${bal[sender].banco + bal[sender].dinero}* ${moneda}`
+        );
+    } else {
+        const montoRetirar = parseInt(cantidad);
+
+        if (isNaN(montoRetirar) || montoRetirar <= 0) {
+            return enviar("❌ Por favor, ingresa un monto válido para retirar. Ejemplo: *#retirar 100*");
+        }
+
+        if (montoRetirar > saldoBanco) {
+            return enviar(`❌ No tienes suficiente dinero en el banco para retirar. Tu saldo actual en el banco es: *${saldoBanco}* ${moneda}.`);
+        }
+
+        // Retirar la cantidad especificada del banco
+        bal[sender].dinero += montoRetirar;
+        bal[sender].banco -= montoRetirar;
+
+        enviar(
+            `✅ Has retirado *${montoRetirar}* ${moneda} del banco.\n\n` +
+            `💰 *Balance actualizado:*\n- Efectivo: *${bal[sender].dinero}* ${moneda}\n` +
+            `- Banco: *${bal[sender].banco}* ${moneda}\n` +
+            `- Total: *${bal[sender].banco + bal[sender].dinero}* ${moneda}`
+        );
+    }
+
+    // Guardar cambios en el archivo de balance
+    fs.writeFileSync('balance.json', JSON.stringify(bal, null, 2));
+
+    break;
+}
+
+case "depositar":
+case "d": {
+    if (isApagado) {
+        return enviar("❖ El bot *Destiny Neko* está desactivado en este grupo. Un *administrador* puede activarlo con el comando: » *#bot on*");
+    }
+
+    // Asegurar que el balance del usuario exista y sea válido
+    if (!bal[sender] || typeof bal[sender] !== "object" || bal[sender] === null) {
+        bal[sender] = { banco: 0, dinero: 0 }; // Crear entrada válida si no existe
+    }
+
+    const args = body.trim().split(/ +/).slice(1); // Obtener los argumentos después del comando
+    const cantidad = args[0]; // La cantidad a depositar (puede ser número o "all")
+
+    if (!cantidad) {
+        return enviar("❌ Por favor, especifica la cantidad a depositar. Ejemplo: *#depositar 100* o *#depositar all*");
+    }
+
+    const efectivoDisponible = bal[sender].dinero;
+
+    if (cantidad.toLowerCase() === "all") {
+        if (efectivoDisponible <= 0) {
+            return enviar("❌ No tienes suficiente dinero en efectivo para depositar.");
+        }
+
+        // Transferir todo el efectivo al banco
+        bal[sender].banco += efectivoDisponible;
+        bal[sender].dinero = 0;
+
+        enviar(
+            `✅ Has depositado todo tu dinero en efectivo (${efectivoDisponible} ${moneda}) al banco.\n\n` +
+            `💰 *Balance actualizado:*\n- Efectivo: *${bal[sender].dinero}* ${moneda}\n` +
+            `- Banco: *${bal[sender].banco}* ${moneda}\n` +
+            `- Total: *${bal[sender].banco + bal[sender].dinero}* ${moneda}`
+        );
+    } else {
+        const montoDepositar = parseInt(cantidad);
+
+        if (isNaN(montoDepositar) || montoDepositar <= 0) {
+            return enviar("❌ Por favor, ingresa un monto válido para depositar. Ejemplo: *#depositar 100*");
+        }
+
+        if (montoDepositar > efectivoDisponible) {
+            return enviar(`❌ No tienes suficiente efectivo para depositar. Tu efectivo actual es: *${efectivoDisponible}* ${moneda}.`);
+        }
+
+        // Transferir la cantidad especificada al banco
+        bal[sender].banco += montoDepositar;
+        bal[sender].dinero -= montoDepositar;
+
+        enviar(
+            `✅ Has depositado *${montoDepositar}* ${moneda} al banco.\n\n` +
+            `💰 *Balance actualizado:*\n- Efectivo: *${bal[sender].dinero}* ${moneda}\n` +
+            `- Banco: *${bal[sender].banco}* ${moneda}\n` +
+            `- Total: *${bal[sender].banco + bal[sender].dinero}* ${moneda}`
+        );
+    }
+
+    // Guardar cambios en el archivo de balance
+    fs.writeFileSync('balance.json', JSON.stringify(bal, null, 2));
+
+    break;
+}
 
 case "":
 enviar("ese comando no existe usa #help para ver la lista de comandos");
