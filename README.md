@@ -11,7 +11,7 @@ Repositorio oficial del innovador **Destiny Neko Bot**, diseñado para ofrecer f
 ---
 
 ## 🚀 Versión
-**v1.0**
+**v1.2**
 
 ---
 
