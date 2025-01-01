@@ -56,7 +56,7 @@ const store = makeInMemoryStore({
         stream: 'store'
     })
 })
-const banner = cfonts.render((`Destiny | Bot Oficial`), {
+const banner = cfonts.render((`rem | Neko`), {
 font: 'tiny',             
 align: 'center',           
 background: 'transparent',  
@@ -374,7 +374,7 @@ let moneda = "coins" //cambia el nombre de la moneda
 let bannerbot = "https://postimage.me/images/2024/12/21/IMG-20241220-WA0088.jpg";
 
 const numerodono = "+5213339992782"; // cambiar número
-const themeemoji = "🥰" ; // cambiar emoji
+const themeemoji = "💙" ; // cambiar emoji
 
 async function startProo() {
 
@@ -453,9 +453,9 @@ sock.ev.on('group-participants.update', async (update) => {
 
                 const mensajeBienvenida = `
 👋 ¡Hola! soy ${botname}! tu bot neko de confianza
- !nueva versión de bot WhatsApp! 
+ ! bienvenida Rem Bot V1.3 Feliz año nuevo! 
  
- ◦•●◉✿ 𝐵𝑜𝑡 𝑛𝑒𝑘𝑜 𝑂𝑓𝑖𝑐𝑖𝑎𝑙 ✿◉●•◦
+ ◦•●◉✿ 𝐵𝑜𝑡 Rem 𝑂𝑓𝑖𝑐𝑖𝑎𝑙 ✿◉●•◦
  
  @${participant.split('@')[0]} 
 Bienvenido(a) al grupo *${(await sock.groupMetadata(id)).subject}*.
@@ -480,7 +480,7 @@ Disfruta de tu estadía. 🎉
                 const mensajeDespedida = `
 😢adios mi Querida amigo o amiga
 
-◦•●◉✿ 𝐵𝑜𝑡 𝑁𝑒𝑘𝑜 𝑂𝑓𝑖𝑐𝑖𝑎𝑙 ✿◉●•◦
+◦•●◉✿ 𝐵𝑜𝑡 Rem 𝑂𝑓𝑖𝑐𝑖𝑎𝑙 ✿◉●•◦
 
  @${participant.split('@')[0]} 
 a salido del grupo
@@ -489,7 +489,7 @@ a salido del grupo
  espero te vaya bien fuera sel grupo xd
  Neko bot de Destiny Oficial🌸
  
- > ¡Te deseamos lo mejor!
+> ¡Te deseamos lo mejor!
  hasta pronto mi buen amigo 👋
  
 > para pedir la lista de comandos es #help y también puedes pedir una foto de un neko con #neko 
@@ -664,7 +664,7 @@ case 'botoff': case 'off':
 if (!isGroupAdmins) return enviar("❖ El comando *bot* solo puede ser usado por los administradores del grupo.")
 apagado.push(from)
 fs.writeFileSync('./archivo/data/apagado.json', JSON.stringify(apagado))
-enviar("El bot Destiny Neko fue desactivado correctamente✅")
+enviar("El bot Rem Neko fue desactivado correctamente✅")
 break
 
 // Case para activar Bot
@@ -673,19 +673,27 @@ if (!isGroupAdmins) return enviar("❖ El comando *bot* solo puede ser usado por
 let activaElbot = apagado.indexOf(from)
 apagado.splice(activaElbot, 1)
 fs.writeFileSync('./archivo/data/apagado.json', JSON.stringify(apagado))
-enviar("El bot Destiny Neko fué activo con éxito ✅")
+enviar("El bot Rem Neko fué activo con éxito ✅")
 break
 
 case "help":
 case "menu":
-    const helpMessage = `𝐇𝐨𝐥𝐚! 𝐒𝐨𝐲 ${botname} *(owner-Bot)*
-╭┈ ↷
-│ ✐ 𝓝𝓮𝓴𝓸 𝓫𝔂 𝓓𝓮𝓼𝓽𝓲𝓷𝔂 𝓝𝓮𝓴𝓸 
-│ ✐ 𝓐𝓷𝓾𝓷𝓬𝓲𝓸𝓼 𝓝𝓮𝓴𝓸 𝓑𝓸𝓽෴
-│ https://animeoffis.wixsite.com/neko
-│ ✐ 𝖈𝖆𝖓𝖆𝖑 𝖔𝖋𝖎𝖈𝖎𝖆𝖑 𝕹𝖊𝖐𝖔 𝕭𝖔𝖙 ෴
-│ https://whatsapp.com/channel/0029VaZbnPDDzgT7HZ6VYG3e
-╰─────────────────
+    const helpMessage = `
+𝐇𝐨𝐥𝐚! 𝐒𝐨𝐲 ${botname}
+*Bienvenido a la lista de comandos*
+   \`Versión 1.3 de Node.js\`
+   
+   Te muestro mi sitio web para que recibas toda la información:
+   
+   \`Sitio web de anuncios\`
+> ~animeoffis.wixsite.com/neko~
+   
+   \`Canal oficial de WhatsApp\`
+> whatsapp.com/channel/0029VaZbnPDDzgT7HZ6VYG3e
+   
+   \`Problemas o preguntas frecuentes\`
+> destiny-oficial.github.io/reportes_NekoBot/
+   
 𝑎𝑞𝑢𝑖 𝑡𝑖𝑒𝑛𝑒𝑠 𝑙𝑎 𝑙𝑖𝑠𝑡𝑎 𝑑𝑒 𝑐𝑜𝑚𝑎𝑛𝑑𝑜𝑠 ⇩
 2‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎
 - ‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎
@@ -717,6 +725,12 @@ case "menu":
 *bal* - *banco* 
 para ver tu dinero obtenido.
 
+*d* - *deposit*
+depositar tu dinero en el banco.
+*r* - *retirar*
+para retirar tu dinero del banco.
+
+
 »  ⊹˚୨ •(=^●ω●^=)•  *Gacha* ⊹
 
 ✐ Comandos de *Gacha* para conseguir waifu y un harem con tu jugar con tus amigos.
@@ -729,6 +743,9 @@ para ver tu dinero obtenido.
 
 ✦ *#harem* 
 → para ver la waifus reclamadas.
+
+*winfo*
+para ver la información de una waifu.
 
 ✦ *#wimage [nombre]*
 → para ver la información de la waifu.
@@ -771,6 +788,11 @@ para ver tu dinero obtenido.
 ✦ *#off*
 → para apagar el bot de un grupo.
 
+*kick* 
+para expulsar a un usuario de un grupo.
+
+*nsfwon/off*
+para activar o desactivar los comandos nsfw(+18).
 
 »  ⊹˚୨ •(=^●ω●^=)•  *Download* ⊹
 
@@ -3844,6 +3866,240 @@ case "d": {
     break;
 }
 
+case "gif": {
+    if (!isGroup) {
+        return enviar("❖ Este comando solo puede ser usado en grupos.");
+    }
+
+    // Calcula si el bot y el usuario son administradores
+    const isUserGroupAdmin = groupAdmins.includes(sender); // Comprueba si el usuario es admin
+    const isBotGroupAdmins = groupAdmins.includes(sock.user.id.split(":")[0] + "@s.whatsapp.net"); // Comprueba si el bot es admin
+
+    if (!isUserGroupAdmin && !isBotGroupAdmins) {
+        return enviar("❌ Este comando solo puede ser usado por administradores del grupo o si el bot es administrador.");
+    }
+
+    try {
+        // Verifica el formato del comando
+        const categoria = args[0]; // Primer argumento: categoría
+        const link = args[1]; // Segundo argumento: enlace
+
+        if (!categoria || !link) {
+            return enviar("❌ Formato incorrecto. Usa: *#gif <categoría> <link>*");
+        }
+
+        // Validar que el enlace sea un GIF o un archivo válido
+        const esValido = link.match(/\.(gif|mp4|webm)$/i);
+        if (!esValido) {
+            return enviar("❌ El enlace proporcionado no parece ser un GIF o video válido.");
+        }
+
+        // Cargar la base de datos NSFW
+        const nsfwDBPath = './archivo/data/nsfwDB.json';
+        let nsfwDB = {};
+
+        if (fs.existsSync(nsfwDBPath)) {
+            nsfwDB = JSON.parse(fs.readFileSync(nsfwDBPath, 'utf-8'));
+        }
+
+        // Verifica si la categoría existe, si no, la crea
+        if (!nsfwDB[categoria]) {
+            nsfwDB[categoria] = [];
+        }
+
+        // Añadir el enlace a la categoría
+        nsfwDB[categoria].push(link);
+
+        // Guardar cambios en la base de datos
+        fs.writeFileSync(nsfwDBPath, JSON.stringify(nsfwDB, null, 2));
+
+        enviar(`✅ GIF añadido exitosamente a la categoría *${categoria}*.`);
+    } catch (err) {
+        console.error("Error al añadir el GIF al nsfwDB:", err.message);
+        enviar("❌ Ocurrió un error al añadir el GIF. Intenta nuevamente.");
+    }
+    break;
+}
+		
+case "nsfwon": {
+    if (!isGroupAdmins) {
+        return enviar("❖ Este comando solo puede ser usado por administradores.");
+    }
+
+    antilinkState[from] = true; // Activar NSFW
+    saveAntilinkState();
+    enviar("✅ El contenido NSFW ha sido activado en este grupo.");
+    break;
+}
+
+case "nsfwoff": {
+    if (!isGroupAdmins) {
+        return enviar("❖ Este comando solo puede ser usado por administradores.");
+    }
+
+    antilinkState[from] = false; // Desactivar NSFW
+    saveAntilinkState();
+    enviar("✅ El contenido NSFW ha sido desactivado en este grupo.");
+    break;
+}
+
+case "bj": {
+    ejecutarNSFW("bj", "le dio una mamad* a");
+    break;
+}
+
+case "cum": {
+    ejecutarNSFW("cum", "cumeó a");
+    break;
+}
+
+case "fuck": {
+    ejecutarNSFW("fuck", "se cogió a");
+    break;
+}
+
+// Función genérica para manejar comandos NSFW
+async function ejecutarNSFW(categoria, accion) {
+    if (!isGroup) {
+        return enviar("❖ Este comando solo puede ser usado en grupos.");
+    }
+
+    // Verificar si el NSFW está activado en el grupo
+    if (!antilinkState[from]) {
+        return enviar("❌ El contenido NSFW no está activado en este grupo. Pide a un administrador que lo active.");
+    }
+
+    try {
+        // Cargar la base de datos de NSFW
+        const nsfwDBPath = './archivo/data/nsfwDB.json';
+        if (!fs.existsSync(nsfwDBPath)) {
+            return enviar("❌ No se encontró la base de datos de contenido NSFW.");
+        }
+
+        const nsfwDB = JSON.parse(fs.readFileSync(nsfwDBPath, 'utf-8'));
+
+        // Verificar si hay contenido para la categoría
+        const contenido = nsfwDB[categoria];
+
+        if (!contenido || contenido.length === 0) {
+            return enviar(`❌ No hay contenido para la categoría *${categoria}*.`);
+        }
+
+        // Seleccionar un enlace al azar de la categoría
+        const enlaceAleatorio = contenido[Math.floor(Math.random() * contenido.length)];
+
+        // Obtener la mención
+        const mencionado = info.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+        if (!mencionado) {
+            return enviar(`❌ Debes mencionar a alguien para usar el comando *${categoria}*.`);
+        }
+
+        // Construir el mensaje
+        const mensaje = `🔥 @${sender.split('@')[0]} ${accion} @${mencionado.split('@')[0]}`;
+
+        // Enviar el GIF y el mensaje
+        await sock.sendMessage(from, {
+            video: { url: enlaceAleatorio },
+            caption: mensaje,
+            mentions: [sender, mencionado]
+        });
+    } catch (err) {
+        console.error(`Error al ejecutar el comando NSFW (${categoria}):`, err.message);
+        enviar("❌ Ocurrió un error al obtener el contenido NSFW. Intenta nuevamente más tarde.");
+    }
+}
+
+case "kick":
+    if (!isGroup) {
+        return enviar("❌ Este comando solo puede ser usado en grupos.");
+    }
+
+    if (!isGroupAdmins) {
+        return enviar("❌ Solo los administradores del grupo pueden usar este comando.");
+    }
+
+    if (!isBotGroupAdmins) {
+        return enviar("❌ No puedo expulsar usuarios porque no soy administrador del grupo.");
+    }
+
+    // Obtener el ID del usuario mencionado
+    const mencionado = info.message.extendedTextMessage?.contextInfo?.mentionedJid;
+    if (!mencionado || mencionado.length === 0) {
+        return enviar("❌ Por favor, menciona al usuario que deseas expulsar. Ejemplo: #kick @usuario");
+    }
+
+    // Verificar si es posible expulsar al usuario
+    const usuarioExpulsar = mencionado[0];
+    if (groupAdmins.includes(usuarioExpulsar)) {
+        return enviar("❌ No puedo expulsar a un administrador del grupo.");
+    }
+
+    try {
+        // Expulsar al usuario del grupo
+        await sock.groupParticipantsUpdate(from, [usuarioExpulsar], "remove");
+        enviar(`✅ Usuario @${usuarioExpulsar.split("@")[0]} ha sido expulsado exitosamente.`, [usuarioExpulsar]);
+    } catch (error) {
+        console.error("Error al expulsar al usuario:", error.message);
+        enviar("❌ Hubo un error al intentar expulsar al usuario. Por favor, inténtalo de nuevo.");
+    }
+    break;
+
+case "winfo":
+    if (isApagado) {
+        return enviar(`❖ El bot *${botname}* está desactivado en este grupo. Un *administrador* puede activarlo con el comando: » *#bot on*`);
+    }
+
+    // Verificar si se proporcionó un nombre
+    if (!q) {
+        return enviar("❌ Por favor, proporciona el nombre de la waifu. Ejemplo: #winfo emilia");
+    }
+
+    const grupoID = from; // ID del grupo actual
+    const nombreWaifu = q.toLowerCase(); // Nombre de la waifu buscada (en minúsculas)
+
+    // Buscar en waifusDB
+    const waifuDB = waifus.find(w => w.name.toLowerCase() === nombreWaifu);
+    if (!waifuDB) {
+        return enviar(`❌ No se encontró ninguna waifu con el nombre "${q}" en la base de datos.`);
+    }
+
+    // Buscar en groupHarem para verificar si está reclamada
+    let claimedBy = null;
+    if (groupHarem[grupoID]) {
+        for (const usuario in groupHarem[grupoID]) {
+            const waifusUsuario = groupHarem[grupoID][usuario];
+            const waifuReclamada = waifusUsuario.find(w => w.name.toLowerCase() === nombreWaifu);
+            if (waifuReclamada) {
+                claimedBy = waifuReclamada.claimedBy;
+                break;
+            }
+        }
+    }
+
+    // Preparar el mensaje de la waifu
+    const nombre = waifuDB.name || "No especificado";
+    const genero = waifuDB.gender || "No especificado";
+    const valor = waifuDB.value || "0";
+    const fuente = waifuDB.source || "Desconocida";
+    const estado = claimedBy
+        ? `❌ *Estado:* Reclamada por @${claimedBy.split('@')[0]}`
+        : `✅ *Estado:* Disponible`;
+
+    const waifuInfo = `
+❀ Nombre: ${nombre}
+⚥ Género: ${genero}
+✰ Valor: ${valor}
+${estado}
+❖ Fuente: ${fuente}
+    `;
+
+    // Enviar solo el texto
+    enviar(waifuInfo);
+    break;
+
+
+
+		
 case "":
 enviar("ese comando no existe usa #help para ver la lista de comandos");
 break;
